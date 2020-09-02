@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/hgfs/Linux/Kaiye/src/Log.cpp
+Log.h
+/mnt/hgfs/Linux/Kaiye/src/Log.h
+iostream
+-
+tuple
+-
+time.h
+-
+
+/mnt/hgfs/Linux/Kaiye/src/Log.h
+string
+-
+memory
+-
+sstream
+-
+fstream
+-
+vector
+-
+list
+-
+stdio.h
+-
+stdarg.h
+-
+
+/mnt/hgfs/Linux/Kaiye/src/Main.cpp
+Log.h
+/mnt/hgfs/Linux/Kaiye/src/Log.h
+

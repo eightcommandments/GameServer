@@ -1,0 +1,1 @@
+/usr/bin/c++   -O0 -Wall -g2 -ggdb  -rdynamic CMakeFiles/Main.dir/mnt/hgfs/Linux/Kaiye/src/Log.cpp.o CMakeFiles/Main.dir/mnt/hgfs/Linux/Kaiye/src/Main.cpp.o  -o /mnt/hgfs/Linux/Kaiye/bin/Main 

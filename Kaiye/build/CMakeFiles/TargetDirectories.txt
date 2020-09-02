@@ -1,0 +1,3 @@
+/mnt/hgfs/Linux/Kaiye/build/CMakeFiles/rebuild_cache.dir
+/mnt/hgfs/Linux/Kaiye/build/CMakeFiles/Main.dir
+/mnt/hgfs/Linux/Kaiye/build/CMakeFiles/edit_cache.dir
