@@ -1,6 +1,8 @@
 #ifndef __KAIYE_SERVER_H__
 #define __KAIYE_SERVER_H__
 
+#include "Socket.h"
+
 #include <thread>
 
 #include <event2/event.h>  
@@ -10,18 +12,25 @@
 namespace Kaiye {
     
     
-class Server {
+class TCPServer {
 public:
-    Server();
-    ~Server();
+    TCPServer(std::string ip, int port);
+    ~TCPServer();
 
     int Init();
     void Start();
 
+    friend void do_accept(evutil_socket_t fd, short event, void *arg);
+    friend void do_read(evutil_socket_t fd, short event, void *arg);
+    friend void do_write(evutil_socket_t fd, short event, void *arg);
+
+
+
 private:
     std::string m_ip;
     int m_port;
-
+    Socket* m_pSocket;
+    
     std::thread* m_pThread;
 
     struct event_base* m_base_ev;
