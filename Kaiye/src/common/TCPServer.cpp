@@ -10,12 +10,18 @@
 #include <string.h>  
 #include <fcntl.h>   
 
-
+#include "SocketManager.h"
 
 namespace Kaiye
 {
 
 void do_accept(evutil_socket_t fd, short event, void *arg) {
+    TCPServer* sev = (TCPServer*)arg;
+    if (nullptr == sev)
+    {
+        return;
+    }
+
     int client_socketfd;//客户端套接字      
     struct sockaddr_in client_addr; //客户端网络地址结构体     
     int in_size = sizeof(struct sockaddr_in);    
@@ -29,14 +35,15 @@ void do_accept(evutil_socket_t fd, short event, void *arg) {
  
     //创建一个事件，这个事件主要用于监听和读取客户端传递过来的数据  
     //持久类型，并且将base_ev传递到do_read回调函数中去  
-    struct event *ev;  
-    ev = event_new(base_ev, client_socketfd, EV_TIMEOUT|EV_READ|EV_PERSIST, do_read, base_ev);
 
-    m_pSocket = SocketPool::Instance().CreateSocket(client_socketfd, ev);
+    m_pSocket = SocketManager::Instance().CreateSocket(client_socketfd, nullptr);
     if (nullptr == m_pSocket)
     {
         return;
     }
+
+    struct event *ev;  
+    ev = event_new(sev.m_base_ev, client_socketfd, EV_TIMEOUT|EV_READ|EV_PERSIST, do_read, (void*)m_pSocket);
 
     event_add(ev, NULL);
 }
@@ -104,7 +111,7 @@ int TCPServer::Init() {
         return -2;
     }
 
-    m_pSocket = SocketPool::Instance().CreateSocket(sockfd, m_event);
+    m_pSocket = SocketManager::Instance().CreateSocket(sockfd, m_event);
     if (nullptr == m_pSocket)
     {
         return -6;

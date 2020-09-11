@@ -12,18 +12,21 @@ class SocketPool {
 public:
     static SocketPool& Instance()
     {
-        static SocketPool sockpool;
-        return sockpool;
+        return __instance;
     }
 
     SocketPool();
     ~SocketPool();
 
-    Socket* CreateSocket(int sockfd, struct event* ev);
+    Socket* AddSocket(Socket* sock);
     Socket* GetSocket(int sockfd);
-
+    
+private:
+    static SocketPool __instance;
 private:
     std::unordered_map<int, Socket*> m_sock_pool;
+
+    
 };
 
 }
